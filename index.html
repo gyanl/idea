@@ -4,7 +4,6 @@
     <title>Fake Checker</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="https://unpkg.com/feather-icons"></script>
   </head>
 
   <body id="page">
@@ -14,7 +13,12 @@
         <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
           <header class="post-header">
-            <h1 id="title" class="post-title p-name" itemprop="name headline">Interning at Microsoft</h1>
+            <h1 id="title" class="post-title p-name" itemprop="name headline">
+              <span onclick="this.contentEditable = 'true'; this.classList.add('comment-box')" onblur="setSummary();this.classList.remove('comment-box')" id="post-summary" contenteditable="true" class="">
+                Smoking Kills
+              </span>
+            </h1>
+
             <div id="description" class="sub-title">Some thoughts on designing for AI at my internship at Microsoft Hyderabad, where I worked on integrating intelligent assistance in an existing Microsoft app.</div><span class="post-meta">
     <span class="dt-published" datetime="2019-07-13T00:00:00+00:00" itemprop="datePublished">Last updated Sat, 13 Jul, 2019
     </span></span>
@@ -49,7 +53,7 @@
     </main>
 
     <div class="header bg-header">
-      <a href="index.html" class="header-text"><img class="header-logo" src="fclogo.svg"></a>
+      <a href="index.html" class="header-text">Logo</a>
       <input type="search" class="search" value="Search" onfocus="this.value=''" onblur="this.value='Search'"></input>
     </div>
 
@@ -115,7 +119,6 @@
 
 
       <a id="link" class="alert weblink">
-        <img class="icon20" src="img/web.png">
         <span id="link-title">...</span>
         <div class="smaller opacity50 smallcaps"><span id="link-source">...</span><i class="icon16" data-feather="chevron-right"></i></div>
       </a>
@@ -161,7 +164,7 @@
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js";
-import { database } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js";
+import { getDatabase } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-analytics.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -178,23 +181,31 @@ const firebaseConfig = {
   measurementId: "G-CVF81V77DF"
 };
 
+
+// Set the configuration for your app
+// TODO: Replace with your project's config object
+var config = {
+  apiKey: "AIzaSyCLkh1I6haUU51EslRGSlXkXiYqOkvcCKA",
+  authDomain: "idea-cbd6c.firebaseapp.com",
+  // For databases not in the us-central1 location, databaseURL will be of the
+  // form https://[databaseName].[region].firebasedatabase.app.
+  // For example, https://your-database-123.europe-west1.firebasedatabase.app
+  databaseURL: "https://idea-cbd6c-default-rtdb.asia-southeast1.firebasedatabase.app/",
+  storageBucket: "bucket.appspot.com"
+};
+
+// firebase.initializeApp(config);
+
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
-      var database = firebase.database();
+ // Get a reference to the database service
+var database = firebase.database();
 
       var currentPostId = location.search.substring(1);
       console.log(currentPostId);
-
-
-
-
-      var numComments = 0;
-      var numTrue = 1;
-      var numMisleading = 2;
-      var numPartlyFake = 3;
-      var numFake = 4;
 
       function setSummary() {
         if (document.getElementById("post-summary").innerHTML != 'Click to add a summary.') {
@@ -455,8 +466,6 @@ const analytics = getAnalytics(app);
       }
     </script>
 
-
-    <script type="text/javascript" src="script.js"></script>
   </body>
 
 </html>
